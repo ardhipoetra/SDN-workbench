@@ -6,9 +6,9 @@ from mininet.log import setLogLevel, info
 
 def myNet():
     cPort1=6666
-    cPort2=6666
+    cPort2=6667
 
-    net = Mininet()
+    net = Mininet( topo=None, build=False)
 
     # Create nodes
     h1 = net.addHost( 'h1', mac='01:00:00:00:01:00', ip='192.168.0.1/24' )
@@ -32,17 +32,17 @@ def myNet():
     net.addLink(s3, s4, )
 
     # Add Controllers
-    con1 = net.addController('c0')
-    # con2 = net.addController( 'c1')
+    con1 = net.addController( 'c0', controller=RemoteController, ip='127.0.0.1', port=cPort1)
+    con2 = net.addController( 'c1', controller=RemoteController, ip='127.0.0.1', port=cPort2)
 
 
     net.build()
-    net.start()
+
     # Connect each switch to a different controller
     s1.start( [con1] )
     s2.start( [con1] )
-    s3.start( [con1] )
-    s4.start( [con1] )
+    s3.start( [con2] )
+    s4.start( [con2] )
 
     # s1.cmdPrint('ovs-vsctl show')
 
