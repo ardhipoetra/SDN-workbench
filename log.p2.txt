@@ -1,0 +1,165 @@
+POX 0.2.0 (carp) / Copyright 2011-2013 James McCauley, et al.
+DEBUG:core:POX 0.2.0 (carp) going up...
+DEBUG:core:Running on CPython (2.7.4/Apr 19 2013 18:28:01)
+DEBUG:core:Platform is Linux-3.8.0-19-generic-x86_64-with-Ubuntu-13.04-raring
+INFO:core:POX 0.2.0 (carp) is up.
+DEBUG:openflow.of_01:Listening on 0.0.0.0:6667
+Ready.
+POX> INFO:openflow.of_01:[None 1] closed
+INFO:openflow.of_01:[c2-dc-c2-87-51-42 2] connected
+DEBUG:forwarding.l2_learning:Connection [c2-dc-c2-87-51-42 2]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     7
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:[00-00-00-00-00-01 3] connected
+DEBUG:forwarding.l2_learning:Connection [00-00-00-00-00-01 3]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     14
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     13
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:[c2-dc-c2-87-51-42 2] closed
+INFO:openflow.of_01:[00-00-00-00-00-02 4] connected
+DEBUG:forwarding.l2_learning:Connection [00-00-00-00-00-02 4]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     21
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     20
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:[00-00-00-00-00-01 3] closed
+INFO:openflow.of_01:[6a-52-3b-e6-cb-47 5] connected
+DEBUG:forwarding.l2_learning:Connection [6a-52-3b-e6-cb-47 5]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     27
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     28
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:[00-00-00-00-00-02 4] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 6] connected
+DEBUG:forwarding.l2_learning:Connection [00-00-00-00-00-01 6]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     34
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     35
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:[00-00-00-00-00-02 7] connected
+DEBUG:forwarding.l2_learning:Connection [00-00-00-00-00-02 7]
+SET ROLE L2 LEARNING INIT  False
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     41
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     43
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     42
+  vendor: 8992
+  datalen: 8
+POX>  ...  ... POX> INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     44
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     46
+  vendor: 8992
+  datalen: 8
+INFO:openflow.of_01:Vendor msg: ofp_vendor_generic
+  header: 
+    version: 1
+    type:    4 (OFPT_VENDOR)
+    length:  20
+    xid:     45
+  vendor: 8992
+  datalen: 8
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:01.1 -> 00:00:00:00:00:02.2
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:01.1 -> 00:00:00:00:00:02.2
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:02.2 -> 00:00:00:00:00:01.1
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:01.1 -> 00:00:00:00:00:02.2
+DEBUG:forwarding.l2_learning:installing flow for 00:00:00:00:00:01.1 -> 00:00:00:00:00:02.2
+INFO:openflow.of_01:[6a-52-3b-e6-cb-47 5] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 6] closed
+INFO:openflow.of_01:[00-00-00-00-00-02 7] closed
+
+INFO:core:Going down...
+INFO:core:Down.
