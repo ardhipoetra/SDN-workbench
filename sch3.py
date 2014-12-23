@@ -92,11 +92,8 @@ def myNet():
 			break
 
 
-	print 'SET ROLE C2 AS MASTER at %.10f' %time.time()
-	p2.stdin.write("import pox.openflow.nicira as nx\n")
-	p2.stdin.write("for connection in core.openflow.connections:\n")
-	p2.stdin.write("\tconnection.send(nx.nx_role_request(master='true'))\n")
-	p2.stdin.write('\n')
+	print 'START C2 AS MASTER at %.10f' %time.time()
+	p2 = subprocess.Popen(['pox/pox.py',"master67"],stdin=subprocess.PIPE, stdout=p2_log,stderr=p2_log,preexec_fn=os.setpgrp)
 
 	while True:
 		p = subprocess.Popen(["ovs-vsctl", "-f", "csv", "list", "controller"], stdout=subprocess.PIPE)
@@ -146,9 +143,7 @@ if __name__ == '__main__':
 	setLogLevel( 'info' )
 	
 	p1 = subprocess.Popen(['pox/pox.py', "master66"],stdin=subprocess.PIPE, stdout=p1_log,stderr=p1_log,preexec_fn=os.setpgrp)
-	print 'c1 runs, master'
-	p2 = subprocess.Popen(['pox/pox.py',"slave67"],stdin=subprocess.PIPE, stdout=p2_log,stderr=p2_log,preexec_fn=os.setpgrp)
-	print 'c2 runs, slave'
+	print 'c1 runs, master'	
 
 	print 'wait for 3 seconds...'
 	time.sleep(3)
