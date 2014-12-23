@@ -25,6 +25,7 @@ import pox.openflow.libopenflow_01 as of
 from pox.lib.util import dpid_to_str
 from pox.lib.util import str_to_bool
 import time
+import signal
 
 import pox.openflow.nicira as nx
 
@@ -94,12 +95,12 @@ class LearningSwitch (object):
     #log.debug("Initializing LearningSwitch, transparent=%s",
     #          str(self.transparent))
 
-    print 'This switch is ',isMaster
-    #tell this switch, that this controller is master/slave
+    print 'SET ROLE L2 LEARNING INIT MODE',isMaster
+    # #tell this switch, that this controller is master/slave
     for con in core.openflow.connections:
-      if isMaster:
+      if isMaster == 1:
         con.send(nx.nx_role_request(master="true"))
-      else:
+      elif isMaster == -1:
         con.send(nx.nx_role_request(slave="true"))
 
   def _handle_PacketIn (self, event):
@@ -199,7 +200,7 @@ class l2_learning (object):
     LearningSwitch(event.connection, self.transparent, self.isMaster)
 
 # added new parameter, isMaster
-def launch (transparent=False, hold_down=_flood_delay, isMaster=True):
+def launch (transparent=False, hold_down=_flood_delay, isMaster=0):
   """
   Starts an L2 learning switch.
   """

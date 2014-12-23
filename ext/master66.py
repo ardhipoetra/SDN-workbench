@@ -15,5 +15,5 @@ def launch ():
   launch(6666)
  
   from pox.forwarding.l2_learning import launch
-  launch(isMaster=True)
+  launch(isMaster=1)
 

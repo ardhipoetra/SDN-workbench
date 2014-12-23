@@ -8,11 +8,11 @@ def launch ():
   from pox.log.level import launch
   launch(DEBUG=True)
 
-  # from pox.py import launch
-  # launch()
+  from pox.py import launch
+  launch()
  
   from pox.openflow.of_01 import launch
   launch(6667)
  
   from pox.forwarding.l2_learning import launch
-  launch(isMaster=True)
+  launch(isMaster=1)
