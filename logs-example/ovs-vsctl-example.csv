@@ -1,0 +1,11 @@
+_uuid,connection_mode,controller_burst_limit,controller_rate_limit,enable_async_messages,external_ids,inactivity_probe,is_connected,local_gateway,local_ip,local_netmask,max_backoff,other_config,role,status,target
+983d2d48-e36e-4444-8c89-c2b264fb718b,[],[],[],[],{},[],false,[],[],[],1000,{},other,"{last_error=""Connection refused"", sec_since_connect=""415"", sec_since_disconnect=""304"", state=BACKOFF}","""tcp:127.0.0.1:6666"""
+6e882690-c1d2-4a4b-9061-a7b641b8cc9e,[],[],[],[],{},[],true,[],[],[],1000,{},slave,"{sec_since_connect=""415"", state=ACTIVE}","""tcp:127.0.0.1:6667"""
+a26801a2-e76a-4785-ba1e-4d535f1a7bee,[],[],[],[],{},[],true,[],[],[],1000,{},slave,"{sec_since_connect=""415"", state=ACTIVE}","""tcp:127.0.0.1:6667"""
+5291fa3a-8352-4cdd-b81d-5d0585ee306b,[],[],[],[],{},[],false,[],[],[],1000,{},other,"{last_error=""Connection refused"", sec_since_connect=""415"", sec_since_disconnect=""304"", state=BACKOFF}","""tcp:127.0.0.1:6666"""
+df7d4193-d824-49db-9186-ffbfcb14ffdd,[],[],[],[],{},[],true,[],[],[],1000,{},slave,"{sec_since_connect=""415"", state=ACTIVE}","""tcp:127.0.0.1:6667"""
+f2f57c33-edca-479c-8655-386b8726eb0a,[],[],[],[],{},[],false,[],[],[],1000,{},other,"{last_error=""Connection refused"", sec_since_connect=""415"", sec_since_disconnect=""304"", state=BACKOFF}","""tcp:127.0.0.1:6666"""
+90c71f13-2026-4b72-9634-1ec40ba15d99,[],[],[],[],{},[],false,[],[],[],1000,{},other,"{last_error=""Connection refused"", sec_since_connect=""415"", sec_since_disconnect=""304"", state=BACKOFF}","""tcp:127.0.0.1:6666"""
+feda6323-0fb7-4f24-b15b-1d3c854c8f32,[],[],[],[],{},[],false,[],[],[],1000,{},other,"{last_error=""Connection refused"", sec_since_connect=""415"", sec_since_disconnect=""304"", state=BACKOFF}","""tcp:127.0.0.1:6666"""
+0f2f8a65-60a4-4127-b67e-12c000a983cf,[],[],[],[],{},[],true,[],[],[],1000,{},slave,"{sec_since_connect=""415"", state=ACTIVE}","""tcp:127.0.0.1:6667"""
+a759e0ad-4400-46cf-ab85-10e9e1c993b4,[],[],[],[],{},[],true,[],[],[],1000,{},slave,"{sec_since_connect=""415"", state=ACTIVE}","""tcp:127.0.0.1:6667"""
