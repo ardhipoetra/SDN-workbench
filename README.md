@@ -13,6 +13,10 @@ Currently, we run POX 0.2.0 (carp) with CPython (2.7.4)
 ## Installation
 
 * Copy `ext/` folder into `ext/` in your `pox` library. These files is needed to run several _profile_ in POX. 
+* Install `hping3` in your machine. For ubuntu machine, you can run : 
+```
+sudo apt-get install hping3
+```
 * Overwrite `l2_learning.py` with its corresponding file in `pox/pox/forwarding`. This file is necessary to tell POX what is its role in the initialization.
 * Check if you already have package `iptables` in your python environment. In a simple way, you can install it with : 
 
