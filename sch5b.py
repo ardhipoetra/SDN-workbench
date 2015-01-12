@@ -12,7 +12,7 @@ import csv
 import StringIO
 import iptc
 
-HOSTS = 16
+HOSTS = 4
 
 p1_log = open('logs-example/log.p1.txt', 'w')
 p2_log = open('logs-example/log.p2.txt', 'w')
@@ -70,37 +70,8 @@ def myNet():
 
 	net.start()
 
-
-	# we shall wait for original master to become ready
-	while True:
-		p = subprocess.Popen(["ovs-vsctl", "-f", "csv", "list", "controller"], stdout=subprocess.PIPE)
-		output, err = p.communicate()
-		f = StringIO.StringIO(output)
-
-		reader = csv.reader(f, delimiter=',')
-		rownum = 0
-
-		con66 = [] # not using this for now
-		con67 = []
-
-		for row in reader:
-			uuid = row[0]
-			target = row[15]
-			role = row[13]
-			i = target.find(str(cPort1))
-			if i != -1:
-				if (role == 'master'):
-					con66.append(uuid)
-		f.close()
-		if len(con66) == HOSTS:
-			starttime = time.time()
-			print 'original master ready at %.10f' %starttime
-			break
-
 	tping = time.time()
 	# print 'h0 ping : %.10f' % tping
-
-	# CLI(net)
 
 	for i in range(0, HOSTS/2):
 		tmping = time.time()
@@ -115,7 +86,7 @@ def myNet():
 
 	while True:
 		tcur = time.time()
-		if tcur - tping > 3: # after 2s running
+		if tcur - tping > 2: # after 2s running
 
 			# print 'SET ROLE C1 SLAVE '
 			# p1.stdin.write("import pox.openflow.nicira as nx\n")
@@ -145,9 +116,6 @@ def myNet():
 		con66 = [] # not using this for now
 		con67 = []
 
-		# print output
-		# print '========================================================'
-
 		for row in reader:
 			uuid = row[0]
 			target = row[15]
@@ -157,10 +125,11 @@ def myNet():
 				if (role == 'master'):
 					con67.append(uuid)
 
+		f.close()
+		
 		if len(con67) == HOSTS:
 			uptime = time.time()
 			print 'new master ready at %.10f' %uptime
-			f.close()
 			break
 
 
@@ -192,8 +161,14 @@ if __name__ == '__main__':
 	p2 = subprocess.Popen(['pox/pox.py',"slave67"],stdin=subprocess.PIPE, stdout=p2_log,stderr=p2_log,preexec_fn=os.setpgrp)
 	print 'c2 runs, slave'
 
+	
+
 	print 'wait for 3 seconds...'
 	time.sleep(3)
+
+	subprocess.Popen(['cbench','-c' ,'localhost','-p','6667','-m','10000','-l','10','-s','16','-M','1000','-t'],preexec_fn=os.setpgrp)
+	print 'wait cbench to start'
+	time.sleep(1)
 	
 	myNet()
 

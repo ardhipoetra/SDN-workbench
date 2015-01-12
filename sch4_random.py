@@ -4,6 +4,7 @@ from mininet.net import Mininet
 from mininet.node import Controller, RemoteController
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
+from random import randint
 
 import time
 import os
@@ -12,10 +13,12 @@ import csv
 import StringIO
 import iptc
 
-HOSTS = 16
+HOSTS = 4
+rand = randint(0,9999)
+print rand
 
-p1_log = open('logs-example/log.p1.txt', 'w')
-p2_log = open('logs-example/log.p2.txt', 'w')
+p1_log = open('logs-example/%d-log.p1.txt' %(rand), 'w')
+p2_log = open('logs-example/%d-log.p2.txt' %(rand), 'w')
 
 def closePort(port):
 	rule=iptc.Rule()
@@ -70,37 +73,8 @@ def myNet():
 
 	net.start()
 
-
-	# we shall wait for original master to become ready
-	while True:
-		p = subprocess.Popen(["ovs-vsctl", "-f", "csv", "list", "controller"], stdout=subprocess.PIPE)
-		output, err = p.communicate()
-		f = StringIO.StringIO(output)
-
-		reader = csv.reader(f, delimiter=',')
-		rownum = 0
-
-		con66 = [] # not using this for now
-		con67 = []
-
-		for row in reader:
-			uuid = row[0]
-			target = row[15]
-			role = row[13]
-			i = target.find(str(cPort1))
-			if i != -1:
-				if (role == 'master'):
-					con66.append(uuid)
-		f.close()
-		if len(con66) == HOSTS:
-			starttime = time.time()
-			print 'original master ready at %.10f' %starttime
-			break
-
 	tping = time.time()
 	# print 'h0 ping : %.10f' % tping
-
-	# CLI(net)
 
 	for i in range(0, HOSTS/2):
 		tmping = time.time()
@@ -110,12 +84,12 @@ def myNet():
 		to = dr+1
 		print to
 		print 'h%d ping h%d: %.10f' % (dr, to, tmping)
-		cmd = 'hping3 -c 200 -i u20000 %s > logs-example/log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), dr,to)
+		cmd = 'hping3 -c 200 -i u20000 %s > logs-example/%d-log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), rand, dr,to,)
 		hosts[dr].cmdPrint(cmd) 
 
 	while True:
 		tcur = time.time()
-		if tcur - tping > 3: # after 2s running
+		if tcur - tping > 2: # after 2s running
 
 			# print 'SET ROLE C1 SLAVE '
 			# p1.stdin.write("import pox.openflow.nicira as nx\n")
@@ -145,9 +119,6 @@ def myNet():
 		con66 = [] # not using this for now
 		con67 = []
 
-		# print output
-		# print '========================================================'
-
 		for row in reader:
 			uuid = row[0]
 			target = row[15]
@@ -157,10 +128,11 @@ def myNet():
 				if (role == 'master'):
 					con67.append(uuid)
 
+		f.close()
+		
 		if len(con67) == HOSTS:
 			uptime = time.time()
 			print 'new master ready at %.10f' %uptime
-			f.close()
 			break
 
 
@@ -187,9 +159,9 @@ def myNet():
 if __name__ == '__main__':
 	setLogLevel( 'info' )
 	
-	p1 = subprocess.Popen(['pox/pox.py', "master66"],stdin=subprocess.PIPE, stdout=p1_log,stderr=p1_log,preexec_fn=os.setpgrp)
+	p1 = subprocess.Popen(['/home/student/pox/pox.py', "master66"],stdin=subprocess.PIPE, stdout=p1_log,stderr=p1_log,preexec_fn=os.setpgrp)
 	print 'c1 runs, master'
-	p2 = subprocess.Popen(['pox/pox.py',"slave67"],stdin=subprocess.PIPE, stdout=p2_log,stderr=p2_log,preexec_fn=os.setpgrp)
+	p2 = subprocess.Popen(['/home/student/pox/pox.py',"slave67"],stdin=subprocess.PIPE, stdout=p2_log,stderr=p2_log,preexec_fn=os.setpgrp)
 	print 'c2 runs, slave'
 
 	print 'wait for 3 seconds...'
