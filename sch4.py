@@ -12,7 +12,7 @@ import csv
 import StringIO
 import iptc
 
-HOSTS = 16
+HOSTS = 6
 
 p1_log = open('logs-example/log.p1.txt', 'w')
 p2_log = open('logs-example/log.p2.txt', 'w')
