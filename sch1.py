@@ -77,55 +77,55 @@ def myNet():
 	#20ms every ping * 200 -> 4s
 
 
-	while True:
-		tcur = time.time()
-		if tcur - tping > 2: # after 2s running
+	# while True:
+	# 	tcur = time.time()
+	# 	if tcur - tping > 2: # after 2s running
 
-			# print 'SET ROLE C1 SLAVE '
-			# p1.stdin.write("import pox.openflow.nicira as nx\n")
-			# p1.stdin.write("for connection in core.openflow.connections:\n")
-			# p1.stdin.write("\tconnection.send(nx.nx_role_request(slave='true'))\n")
-			# p1.stdin.write('\n')
+	# 		# print 'SET ROLE C1 SLAVE '
+	# 		# p1.stdin.write("import pox.openflow.nicira as nx\n")
+	# 		# p1.stdin.write("for connection in core.openflow.connections:\n")
+	# 		# p1.stdin.write("\tconnection.send(nx.nx_role_request(slave='true'))\n")
+	# 		# p1.stdin.write('\n')
 
-			print 'close port %i in %.10f' %(cPort1,tcur)
-			closePort(cPort1)
-			break
+	# 		print 'close port %i in %.10f' %(cPort1,tcur)
+	# 		closePort(cPort1)
+	# 		break
 
 
-	print 'SET ROLE C2 AS MASTER at %.10f' %time.time()
-	p2.stdin.write("import pox.openflow.nicira as nx\n")
-	p2.stdin.write("for connection in core.openflow.connections:\n")
-	p2.stdin.write("\tconnection.send(nx.nx_role_request(master='true'))\n")
-	p2.stdin.write('\n')
+	# print 'SET ROLE C2 AS MASTER at %.10f' %time.time()
+	# p2.stdin.write("import pox.openflow.nicira as nx\n")
+	# p2.stdin.write("for connection in core.openflow.connections:\n")
+	# p2.stdin.write("\tconnection.send(nx.nx_role_request(master='true'))\n")
+	# p2.stdin.write('\n')
 
-	while True:
-		p = subprocess.Popen(["ovs-vsctl", "-f", "csv", "list", "controller"], stdout=subprocess.PIPE)
-		output, err = p.communicate()
-		f = StringIO.StringIO(output)
+	# while True:
+	# 	p = subprocess.Popen(["ovs-vsctl", "-f", "csv", "list", "controller"], stdout=subprocess.PIPE)
+	# 	output, err = p.communicate()
+	# 	f = StringIO.StringIO(output)
 
-		reader = csv.reader(f, delimiter=',')
-		rownum = 0
+	# 	reader = csv.reader(f, delimiter=',')
+	# 	rownum = 0
 
-		con66 = [] # not using this for now
-		con67 = []
+	# 	con66 = [] # not using this for now
+	# 	con67 = []
 
-		for row in reader:
-			uuid = row[0]
-			target = row[15]
-			role = row[13]
-			i = target.find(str(cPort2))
-			if i != -1:
-				if (role == 'master'):
-					con67.append(uuid)
+	# 	for row in reader:
+	# 		uuid = row[0]
+	# 		target = row[15]
+	# 		role = row[13]
+	# 		i = target.find(str(cPort2))
+	# 		if i != -1:
+	# 			if (role == 'master'):
+	# 				con67.append(uuid)
 
-		f.close()
+	# 	f.close()
 		
-		if len(con67) == HOSTS:
-			uptime = time.time()
-			print 'new master ready at %.10f' %uptime
-			break
+	# 	if len(con67) == HOSTS:
+	# 		uptime = time.time()
+	# 		print 'new master ready at %.10f' %uptime
+	# 		break
 
-
+	CLI(net)
 	print 'now wait for hping3 to finish..'
 	hosts[0].cmdPrint('wait %hping3')
 	print 'hping3 finished at %.10f' %time.time()

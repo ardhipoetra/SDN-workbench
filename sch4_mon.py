@@ -14,8 +14,9 @@ import StringIO
 import iptc
 import socket, errno
 
-
-HOSTS = 6
+MON_TIMEOUT = 1.0
+MON_SLEEP 	= 3
+HOSTS = 2
 
 p1_log = open('logs-example/log.p1.txt', 'w')
 p2_log = open('logs-example/log.p2.txt', 'w')
@@ -47,11 +48,13 @@ def ft66(threadname, ports, portd):
 	print threadname , "is running"
 	global flag_mon66
 	global p2
+	global MON_SLEEP
+	global MON_TIMEOUT
 
 	while True:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.setblocking(0)
-		sock.settimeout(1.2)
+		sock.settimeout(MON_TIMEOUT)
 		tmp = sock.connect_ex(('127.0.0.1', ports))
 		if tmp != 0 and flag_mon66 != -1:
 			print 'Controller 1 detected down %s' %errno.errorcode[tmp]
@@ -97,16 +100,18 @@ def ft66(threadname, ports, portd):
 			print 'exiting ',threadname
 			sys.exit()
 
-		time.sleep(1)
+		time.sleep(MON_SLEEP)
 
 def ft67(threadname,ports, portd):
 	print threadname , "is running"
 	global flag_mon67
-	
+	global MON_SLEEP
+	global MON_TIMEOUT
+
 	while True:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.setblocking(0)
-		sock.settimeout(1.2)
+		sock.settimeout(MON_TIMEOUT)
 		tmp = sock.connect_ex(('127.0.0.1', ports))
 
 		if tmp != 0:
@@ -118,7 +123,7 @@ def ft67(threadname,ports, portd):
 		if flag_exit:
 			print 'exiting ',threadname
 			sys.exit()
-		time.sleep(1)
+		time.sleep(MON_SLEEP)
 
     
 
@@ -209,7 +214,7 @@ def myNet():
 		to = dr+1
 		print to
 		print 'h%d ping h%d: %.10f' % (dr, to, tmping)
-		cmd = 'hping3 -c 200 -i u40000 %s > logs-example/log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), dr,to)
+		cmd = 'hping3 -c 500 -i u20000 %s > logs-example/log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), dr,to)
 		hosts[dr].cmdPrint(cmd) 
 
 	while True:

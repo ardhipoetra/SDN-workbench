@@ -12,7 +12,7 @@ import csv
 import StringIO
 import iptc
 
-HOSTS = 6
+HOSTS = 2
 
 p1_log = open('logs-example/log.p1.txt', 'w')
 p2_log = open('logs-example/log.p2.txt', 'w')
@@ -110,7 +110,9 @@ def myNet():
 		to = dr+1
 		print to
 		print 'h%d ping h%d: %.10f' % (dr, to, tmping)
-		cmd = 'hping3 -c 200 -i u20000 %s > logs-example/log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), dr,to)
+		# hping3 -c 200 -i u40000 NEW
+		# hping3 -c 200 -i u20000 OLD
+		cmd = 'hping3 -c 500 -i u20000 %s > logs-example/log.ping%d%d.txt 2>&1 &' %(hosts[to].IP(), dr,to)
 		hosts[dr].cmdPrint(cmd) 
 
 	while True:
@@ -127,7 +129,7 @@ def myNet():
 			closePort(cPort1)
 			break
 
-
+	
 	print 'SET ROLE C2 AS MASTER at %.10f' %time.time()
 	p2.stdin.write("import pox.openflow.nicira as nx\n")
 	p2.stdin.write("for connection in core.openflow.connections:\n")
